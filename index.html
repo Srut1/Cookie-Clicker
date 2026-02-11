@@ -41,29 +41,6 @@
             float: right;
         }
 
-        .buy {
-            background-color: chocolate;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-                .clickme {
-            width: 25%;
-            text-align: center;
-            padding: 5px;
-            background-color: royalblue;
-            color: silver;
-            border-radius: 4px;
-        }
-
-        .clickme:hover {
-            cursor: pointer;
-            background-color: #4144e1;
-        }
-
-        .clickme:active {
-            background-color: #41a4e1;
-        }
     </style>
 
 </head>
@@ -81,23 +58,39 @@
         <div class="column3">
             <h2>Store</h2>
             <hr>
-            <p class="buy">Buy 1</p>
-            <P>price</P>
+            <button type="button" id="shop1" disabled>Buy 1</button>
+            <P>10 cookies</P>
+            <P>+2 cookies per click</P>
             <p class="buy">Buy 2</p>
             <p>price</p>
         </div>
 
     </div>
 
-        <script>
-            let count = 0;
-            document.getElementById("countbutton").addEventListener("click", function(event) {
-                let counter = document.getElementById("score");
-                count += 1;
-                counter.innerHTML = count;
-            });
+    <script>
+        let count = 0;
+        let clickVal = 1;
+        document.getElementById("countbutton").addEventListener("click", function (event) {
+            let counter = document.getElementById("score");
+            count += clickVal;
+            counter.innerHTML = count;
+
+            if (count >= 10) {
+                document.getElementById("shop1").disabled = false;
+            }
+
+            shop1.addEventListener("click", function (event) {
+                if (count >= 10) {
+                    count -= 10;
+                    counter.textContent = count;
+                    clickVal = 2;
+                }
+                if (count < 10) { document.getElementById("shop1").disabled = true; }
+            })
+        });
     </script>
 
 </body>
 
 </html>
+
