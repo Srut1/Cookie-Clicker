@@ -1,131 +1,35 @@
 <!DOCTYPE html>
-
-
 <html lang="en">
-
 <head>
-    <title>Cookie Clicker</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .column1 {
-            width: 30%;
-            background-color: antiquewhite;
-            border: 5px solid black;
-            padding: 10px;
-            margin: auto;
-            float: left;
-
-            h1 {
-                background-color: azure;
-                text-align: center;
-            }
-
-            img {
-                align-items: center;
-            }
-        }
-
-        .column2 {
-            width: 30%;
-            background-color: antiquewhite;
-            border: 5px solid black;
-            padding: 10px;
-            margin: auto;
-            float: center;
-        }
-
-        .column3 {
-            width: 30%;
-            background-color: antiquewhite;
-            border: 5px solid black;
-            padding: 10px;
-            margin: auto;
-            float: right;
-        }
-
-    </style>
-    <script src="cookie.js"></script>
-
+    <title>Cookie Clicker/title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/cookie.js"></script>
 </head>
-
 <body>
-    <div class="row">
-        <div class="column1">
+    <div id="message-bar" class="popup-message"></div>
+
+    <div class="main-container">
+        <div class="column">
             <h1>Clicker</h1>
-            <h1 id="score">0</h1>
-            <input type="image" src="cookie.png" id="countbutton" value="Click" class="clickme" alt="cookiebutton">
+            <h2 id="score">0</h2>
+            <input type="image" src="images/cookie.png" id="countbutton" alt="Click Me!">
+            <br><br>
+            <button id="help-btn">Help / Instructions</button>
+            <p id="help-text" style="display:none;">
+                Click the thing to earn points. Use points in the Store to buy upgrades. Get as many points as you can.
+            </p>
         </div>
-        <div class="column2">
+
+        <div class="column">
             <h1>Rewards</h1>
-        </div>
-        <div class="column3">
-            <h2>Store</h2>
-            <hr>
-            <button type="button" id="shop1" disabled>Buy 1</button>
-            <button type="button" id="shop2" disabled>Add Autoclicker</button>
-            <P>10 cookies</P>
-            <P>+2 cookies per click</P>
-            <p class="buy">Buy 2</p>
-            <p>price</p>
+            <div id="reward-list"></div>
         </div>
 
+        <div class="column">
+            <h1>Store</h1>
+            <button id="shop1" class="store-btn">Buy Upgrade</button>
+            <button id="shop2" class="store-btn">Add Autoclicker</button>
+        </div>
     </div>
-
-    <script>
-        let count = 0;
-        let clickVal = 1; // Value of each click
-        let autoStrength = 0; // Auto clicker value
-
-        const counter = document.getElementById("score");
-        const shop1 = document.getElementById("shop1");
-        const shop2 = document.getElementById("shop2");
-
-        // Manual Click Logic
-        document.getElementById("countbutton").addEventListener("click", function () {
-            count += clickVal;
-            updateUI();
-        });
-
-        // Buy Shop 1 (+ Click Power)
-        shop1.addEventListener("click", function () {
-            if (count >= 10) {
-                count -= 10;
-                clickVal += 1;
-                updateUI();
-            }
-        });
-
-        // Buy Shop 2 (Autoclicker)
-        shop2.addEventListener("click", function () {
-            if (count >= 50) { 
-                count -= 50;
-                autoStrength += 1; // Increase the power of the single timer
-                updateUI();
-            }
-        });
-
-        // THE MASTER TIMER
-        // runs once every second and adds 
-        setInterval(function() {
-            if (autoStrength > 0) {
-                count += autoStrength;
-                updateUI();
-            }
-        }, 1000);
-
-        // UI Update Function
-        function updateUI() {
-            counter.textContent = count;
-            
-            // Enable/Disable buttons based on cost
-            shop1.disabled = count < 10;
-            shop2.disabled = count < 50; 
-        }
-    </script>
-
 </body>
-
 </html>
-
