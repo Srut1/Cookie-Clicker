@@ -1,35 +1,90 @@
 <!DOCTYPE html>
+
+
 <html lang="en">
+
 <head>
-    <title>Cookie Clicker/title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/cookie.js"></script>
+    <title>Cookie Clicker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style href="style.css"></style>
+    </style>
 </head>
+
 <body>
-    <div id="message-bar" class="popup-message"></div>
+    <div id="header">
+        <h1> *Insert super cool title here*</h1>
+        <p>Fight your way to the Demon King's Castle!</p>
 
-    <div class="main-container">
-        <div class="column">
-            <h1>Clicker</h1>
-            <h2 id="score">0</h2>
-            <input type="image" src="images/cookie.png" id="countbutton" alt="Click Me!">
-            <br><br>
-            <button id="help-btn">Help / Instructions</button>
-            <p id="help-text" style="display:none;">
-                Click the thing to earn points. Use points in the Store to buy upgrades. Get as many points as you can.
-            </p>
-        </div>
-
-        <div class="column">
-            <h1>Rewards</h1>
-            <div id="reward-list"></div>
-        </div>
-
-        <div class="column">
-            <h1>Store</h1>
-            <button id="shop1" class="store-btn">Buy Upgrade</button>
-            <button id="shop2" class="store-btn">Add Autoclicker</button>
-        </div>
+        <button id="help-btn">Help / Instructions</button>
+        <p id="help-text" style="display:none;">
+            Click the thing to earn points. Use points in the Store to buy upgrades. Get as many points as you can.
+        </p>
     </div>
+    <hr>
+    <div id="message-bar" class="popup-message"></div>
+    <div class="row">
+        <div class="column1">
+            <div class="hit">
+                <h1>Hits</h1>
+                <h1 id="score1">0</h1>
+            </div>
+            <div class="gold">
+                <h1>Gold</h1>
+                <h1 id="score2">0</h1>
+            </div>
+
+            <div class="pic">
+                <input type="image" src="grass.jpg" id="countbutton" value="Click" class="clickme" alt="cookiebutton">
+                <img src="slime.png" class="slime">
+            </div>
+        </div>
+        <div class="column2">
+            <h1>Gallery</h1>
+            <h2>Heroes</h2>
+            <div class="heroes" id="heroes">
+                <div>
+                    <img src="knight.webp" width="100px">
+                    <img id="witch" src="witch.webp" width="100px" hidden>
+                    <img src="bard.webp" width="100px" hidden>
+                    <img src="rouge.webp" width="100px" hidden>
+                </div>
+                <div>
+                    <img src="archer.webp" width="100px" hidden>
+                    <img src="alchemist.webp" width="100px" hidden>
+                    <img src="paladin.webp" width="100px" hidden>
+                    <img src="necromancer.webp" width="100px" hidden>
+                </div>
+                <div>
+                    <img src="priest.webp" width="100px" hidden>
+                </div>
+            </div>
+            <h2>Achivements</h2>
+            <div id="reward-list"></div>
+
+        </div>
+        <div class="column3">
+            <h1>Store</h1>
+            <hr>
+            <h2>Weapons</h2>
+            <div>
+                <button type="button" id="shop1" class="store-btn" disabled>Wooden Sword</button>
+                <button type="button" id="shop3" class="store-btn" disabled>Sturdy Sword</button>
+                <button type="button" id="shop4" class="store-btn" disabled>Iron Sword</button>
+                <button type="button" id="shop5" class="store-btn" disabled>Flaming Sword</button>
+
+            </div>
+
+            <h2>Allies</h2>
+            <button type="button" id="shop2" class="store-btn" disabled>Hire mercenary</button>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
