@@ -2,8 +2,8 @@
 javascript file
  */
 
-window.addEventListener('load', function() {
-    
+window.addEventListener('load', function () {
+
     // State Variables
     // Variables - can be changed to alter game difficulty
     let count = 0;            // Total resources
@@ -13,7 +13,7 @@ window.addEventListener('load', function() {
     let autoPrice = 50;       // Price for the auto-clicker
 
     // DOM Elements
-    const scoreDisplay = document.getElementById("score");
+    const scoreDisplay = document.getElementById("score1");
     const upgradeBtn = document.getElementById("shop1");
     const autoBtn = document.getElementById("shop2");
     const rewardArea = document.getElementById("reward-list");
@@ -24,12 +24,12 @@ window.addEventListener('load', function() {
     // Updates the text on the screen to match our variables
     function updateUI() {
         scoreDisplay.textContent = Math.floor(count);
-        
+
         // Update button text and disable them if user is too poor
-        upgradeBtn.innerHTML = `Upgrade Click (+1) <br> Cost: ${upgradePrice}`;
+        upgradeBtn.innerHTML = `Upgrade Sword (+1) <br> Cost: ${upgradePrice}`;
         upgradeBtn.disabled = (count < upgradePrice);
 
-        autoBtn.innerHTML = `Autoclicker (+1/s) <br> Cost: ${autoPrice}`;
+        autoBtn.innerHTML = `Hire Mercenary (+1/s) <br> Cost: ${autoPrice}`;
         autoBtn.disabled = (count < autoPrice);
     }
 
@@ -37,7 +37,7 @@ window.addEventListener('load', function() {
     function showAchievement(text) {
         messageBar.textContent = text;
         messageBar.style.display = "block";
-        
+
         // Hide message after 3 seconds
         setTimeout(() => {
             messageBar.style.display = "none";
@@ -54,6 +54,15 @@ window.addEventListener('load', function() {
             addReward("🌟 500 Collected!", "reward-500");
             showAchievement("Incredible! 500 reached!");
         }
+        if (autoStrength >= 3 && !document.getElementById('reward-4')){
+            addReward("4 Allies Gathered!", "reward-4");
+            showAchievement("Power of Friendship!");
+        }
+        if (autoStrength >= 10 && !document.getElementById('reward-11')){
+            addReward("All Allies Gathered!", "reward-11");
+            showAchievement("Full Party");
+        }
+        
     }
 
     // Adds a visual badge to the rewards column
@@ -68,46 +77,59 @@ window.addEventListener('load', function() {
     // EVENT LISTENERS 
 
     // Manual Click Logic
-    document.getElementById("countbutton").addEventListener("click", function() {
+    document.getElementById("countbutton").addEventListener("click", function () {
         count += clickVal;
         checkMilestones();
         updateUI();
     });
 
     // Buy Upgrade (Increases Click Power)
-    upgradeBtn.addEventListener("click", function() {
+    upgradeBtn.addEventListener("click", function () {
         if (count >= upgradePrice) {
             count -= upgradePrice;
             clickVal += 1;
-            upgradePrice = Math.round(upgradePrice * 1.5); // Increase price for next time
+            upgradePrice = Math.round(upgradePrice * 1.8); // Increase price for next time
             updateUI();
         }
     });
 
+
     // Buy Autoclicker
-    autoBtn.addEventListener("click", function() {
+    autoBtn.addEventListener("click", function () {
         if (count >= autoPrice) {
             count -= autoPrice;
             autoStrength += 1;
-            autoPrice = Math.round(autoPrice * 1.8); // Increase price for next time
+            autoPrice = Math.round(autoPrice * 2); // Increase price for next time
+            const allies = document.querySelectorAll("#heroes img");
+            const index = autoStrength;
+
+            if (allies[index]) {
+                allies[index].hidden = false;
+            } // new image under under "Heroes" tab added for each upgrade
+
             updateUI();
         }
     });
 
     // Help Button Toggle
-    document.getElementById("help-btn").addEventListener("click", function() {
+    document.getElementById("help-btn").addEventListener("click", function () {
         const helpText = document.getElementById("help-text");
         helpText.style.display = (helpText.style.display === "none") ? "block" : "none";
     });
 
     // THE MASTER TIMER 
     // Runs every second
-    setInterval(function() {
+    setInterval(function () {
         if (autoStrength > 0) {
             count += autoStrength;
             checkMilestones();
             updateUI();
         }
+    }, 1000);
+
+    // Run UI update once at start to set initial prices/text
+    updateUI();
+});
     }, 1000);
 
     // Run UI update once at start to set initial prices/text
