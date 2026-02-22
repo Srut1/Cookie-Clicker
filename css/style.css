@@ -1,19 +1,31 @@
+/* Import a Medieval font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
 /* Layout Styling */
 .main-container {
     display: flex;
     justify-content: center;
     gap: 20px;
     padding: 50px;
-    font-family: Arial, sans-serif;
+    /* Apply the new font here */
+    font-family: 'MedievalSharp', cursive, serif; 
+}
+
+/* Apply it to headers as well for a consistent look */
+h1, h2, h3 {
+    font-family: 'MedievalSharp', cursive, serif;
+    color: #4a3728; /* Darker brown for a parchment/medieval feel */
 }
 
 .column {
     flex: 1;
     border: 3px solid #333;
-    background-color: #fafafa;
+    /* Change background to a parchment-like color */
+    background-color: #f4e4bc; 
     padding: 20px;
     text-align: center;
     border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
 }
 
 /* Button & Clicker Styling */
@@ -23,7 +35,7 @@
 }
 
 #countbutton:active {
-    transform: scale(0.9); /* Shakes slightly when clicked */
+    transform: scale(0.9);
 }
 
 .store-btn {
@@ -32,6 +44,21 @@
     margin: 10px 0;
     padding: 10px;
     cursor: pointer;
+    /* Apply font to buttons */
+    font-family: 'MedievalSharp', cursive;
+    background-color: #8b4513;
+    color: white;
+    border: 2px solid #3e2723;
+    border-radius: 5px;
+}
+
+.store-btn:hover {
+    background-color: #a0522d;
+}
+
+.store-btn:disabled {
+    background-color: #6d6d6d;
+    cursor: not-allowed;
 }
 
 /* Popup / Achievement Styling */
@@ -41,11 +68,13 @@
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: #444;
-    color: #fff;
+    background: #4a3728;
+    color: #ffd700;
     padding: 15px 30px;
-    border-radius: 50px;
+    border-radius: 10px;
     font-weight: bold;
+    font-family: 'MedievalSharp', cursive;
+    border: 2px solid gold;
 }
 
 .badge {
@@ -54,4 +83,6 @@
     border-radius: 5px;
     margin: 5px;
     border: 1px solid #b8860b;
+    font-family: 'MedievalSharp', cursive;
+    color: #333;
 }

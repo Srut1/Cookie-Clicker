@@ -1,71 +1,63 @@
-/**
-javascript file
- */
-
 window.addEventListener('load', function () {
 
-    // State Variables
-    // Variables - can be changed to alter game difficulty
-    let count = 0;            // Total resources
-    let clickVal = 1;         // Manual click value
-    let autoStrength = 0;     // Auto clicks per second
-    let upgradePrice = 10;    // Price for the first upgrade type
-    let autoPrice = 50;       // Price for the auto-clicker
+    // --- 1. THE MODEL (State Variables) ---
+    let count = 0;            
+    let clickVal = 1;         
+    let autoStrength = 0;     
+    let upgradePrice = 10;    
+    let autoPrice = 50;       
 
-    // DOM Elements
+    // --- 2. THE VIEW (DOM Elements) ---
     const scoreDisplay = document.getElementById("score1");
     const upgradeBtn = document.getElementById("shop1");
     const autoBtn = document.getElementById("shop2");
     const rewardArea = document.getElementById("reward-list");
     const messageBar = document.getElementById("message-bar");
 
-    // HELPER FUNCTIONS 
+    // --- 3. HELPER FUNCTIONS ---
 
-    // Updates the text on the screen to match our variables
     function updateUI() {
         scoreDisplay.textContent = Math.floor(count);
-
-        // Update button text and disable them if user is too poor
         upgradeBtn.innerHTML = `Upgrade Sword (+1) <br> Cost: ${upgradePrice}`;
         upgradeBtn.disabled = (count < upgradePrice);
-
-        autoBtn.innerHTML = `Hire Mercenary (+1/s) <br> Cost: ${autoPrice}`;
+        autoBtn.innerHTML = `Hire Mercenary (+1/s) <cite: 8> <br> Cost: ${autoPrice}`;
         autoBtn.disabled = (count < autoPrice);
     }
 
-    // Displays a congratulations message that fades away
     function showAchievement(text) {
         messageBar.textContent = text;
         messageBar.style.display = "block";
-
-        // Hide message after 3 seconds
-        setTimeout(() => {
-            messageBar.style.display = "none";
-        }, 3000);
+        setTimeout(() => { messageBar.style.display = "none"; }, 3000);
     }
 
-    // Check for milestones (Rewards)
     function checkMilestones() {
+        // Milestone 1: 100 Gold
         if (count >= 100 && !document.getElementById('reward-100')) {
-            addReward("🏆 100 Collected!", "reward-100");
-            showAchievement("Congrats! You hit 100!");
+            addReward("🏆 100 Gold!", "reward-100");
+            showAchievement("Congrats! You hit 100 gold!");
         }
+        // Milestone 2: 500 Gold
         if (count >= 500 && !document.getElementById('reward-500')) {
-            addReward("🌟 500 Collected!", "reward-500");
+            addReward("🌟 500 Gold!", "reward-500");
             showAchievement("Incredible! 500 reached!");
         }
+        // Milestone 3: 3 Allies
         if (autoStrength >= 3 && !document.getElementById('reward-4')){
-            addReward("4 Allies Gathered!", "reward-4");
-            showAchievement("Power of Friendship!");
+            addReward("🤝 Small Party", "reward-4");
+            showAchievement("The Power of Friendship!");
         }
-        if (autoStrength >= 10 && !document.getElementById('reward-11')){
-            addReward("All Allies Gathered!", "reward-11");
-            showAchievement("Full Party");
+        // Milestone 4: 9 Allies
+        if (autoStrength >= 9 && !document.getElementById('reward-11')){
+            addReward("⚔️ Full Party", "reward-11");
+            showAchievement("The squad is complete!");
         }
-        
+        // Milestone 5: Weapon Power (Added for Rubric)
+        if (clickVal >= 5 && !document.getElementById('reward-weapon')){
+            addReward("🔥 Master Smith", "reward-weapon");
+            showAchievement("Your sword is legendary!");
+        }
     }
 
-    // Adds a visual badge to the rewards column
     function addReward(text, id) {
         const badge = document.createElement("p");
         badge.id = id;
@@ -74,51 +66,44 @@ window.addEventListener('load', function () {
         rewardArea.appendChild(badge);
     }
 
-    // EVENT LISTENERS 
+    // --- 4. EVENT LISTENERS ---
 
-    // Manual Click Logic
     document.getElementById("countbutton").addEventListener("click", function () {
         count += clickVal;
         checkMilestones();
         updateUI();
     });
 
-    // Buy Upgrade (Increases Click Power)
     upgradeBtn.addEventListener("click", function () {
         if (count >= upgradePrice) {
             count -= upgradePrice;
             clickVal += 1;
-            upgradePrice = Math.round(upgradePrice * 1.8); // Increase price for next time
+            upgradePrice = Math.round(upgradePrice * 1.8); 
             updateUI();
         }
     });
 
-
-    // Buy Autoclicker
     autoBtn.addEventListener("click", function () {
         if (count >= autoPrice) {
             count -= autoPrice;
             autoStrength += 1;
-            autoPrice = Math.round(autoPrice * 2); // Increase price for next time
+            autoPrice = Math.round(autoPrice * 2); 
+            
+            // Unlocks hero images from the Gallery
             const allies = document.querySelectorAll("#heroes img");
-            const index = autoStrength;
-
-            if (allies[index]) {
-                allies[index].hidden = false;
-            } // new image under under "Heroes" tab added for each upgrade
-
+            if (allies[autoStrength]) {
+                allies[autoStrength].hidden = false;
+            } 
             updateUI();
         }
     });
 
-    // Help Button Toggle
     document.getElementById("help-btn").addEventListener("click", function () {
         const helpText = document.getElementById("help-text");
         helpText.style.display = (helpText.style.display === "none") ? "block" : "none";
     });
 
-    // THE MASTER TIMER 
-    // Runs every second
+    // --- 5. THE MASTER TIMER ---
     setInterval(function () {
         if (autoStrength > 0) {
             count += autoStrength;
@@ -127,11 +112,5 @@ window.addEventListener('load', function () {
         }
     }, 1000);
 
-    // Run UI update once at start to set initial prices/text
-    updateUI();
-});
-    }, 1000);
-
-    // Run UI update once at start to set initial prices/text
-    updateUI();
+    updateUI(); 
 });
