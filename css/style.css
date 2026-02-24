@@ -8,24 +8,45 @@
     gap: 20px;
     padding: 50px;
     /* Apply the new font here */
-    font-family: 'MedievalSharp', cursive, serif; 
+    font-family: 'MedievalSharp', cursive, serif;
+}
+
+body{
+    background-image: url("background.png");
+    background-size: contain;
+    cursor: url('sword.png'), pointer;
+}
+#title {
+  animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    color: white;
+  }
+  100% {
+    color: #f4e4bc;
+  }
 }
 
 /* Apply it to headers as well for a consistent look */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'MedievalSharp', cursive, serif;
-    color: #4a3728; /* Darker brown for a parchment/medieval feel */
+    color: #4a3728;
+    /* Darker brown for a parchment/medieval feel */
 }
 
 .column {
     flex: 1;
     border: 3px solid #333;
     /* Change background to a parchment-like color */
-    background-color: #f4e4bc; 
+    background-color: #f4e4bc;
     padding: 20px;
     text-align: center;
     border-radius: 15px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Button & Clicker Styling */
@@ -54,6 +75,8 @@ h1, h2, h3 {
 
 .store-btn:hover {
     background-color: #a0522d;
+    cursor: url('sword.png'), pointer;
+    
 }
 
 .store-btn:disabled {
@@ -86,3 +109,5 @@ h1, h2, h3 {
     font-family: 'MedievalSharp', cursive;
     color: #333;
 }
+
+.clickme{cursor: url('sword.png'), pointer;}
