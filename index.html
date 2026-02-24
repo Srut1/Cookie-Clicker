@@ -7,12 +7,12 @@
 </head>
 <body>
     <div id="header" style="text-align: center; font-family: 'MedievalSharp', cursive;">
-        <h1>Quest for the Demon King</h1>
-        <p>Forge your destiny and defeat the dark forces!</p>
+        <h1 id="title">Quest Clicker!</h1>
+        <p style="color:white">Forge your destiny and defeat the dark forces!</p>
 
         <button id="help-btn">Help / Instructions</button>
         <div id="help-text" style="display:none;">
-            <p>Click the terrain to earn gold. Use gold in the Store to buy weapon upgrades and hire allies.</p>
+            <p style="background-color: white;" >Click the terrain to earn gold. Use gold in the Store to buy weapon upgrades and hire allies. More upgrades become accessible with more allies.</p>
         </div>
     </div>
     <hr>
@@ -38,10 +38,10 @@
             <div id="heroes">
                 <img src="images/knight.webp" width="80">
                 <img src="images/witch.webp" width="80" hidden>
-                <img src="images/bard.webp" width="80" hidden>
                 <img src="images/rouge.webp" width="80" hidden>
-                <img src="images/archer.webp" width="80" hidden>
                 <img src="images/alchemist.webp" width="80" hidden>
+                <img src="images/archer.webp" width="80" hidden>
+                <img src="images/bard.webp" width="80" hidden>
                 <img src="images/paladin.webp" width="80" hidden>
                 <img src="images/necromancer.webp" width="80" hidden>
                 <img src="images/priest.webp" width="80" hidden>
@@ -55,12 +55,16 @@
             <hr>
             <h2>Weapons</h2>
             <button type="button" id="shop1" class="store-btn" disabled>Wooden Sword</button>
+            <button type="button" id="shop3" class="store-btn" disabled>Wooden Staff</button>
+            <button type="button" id="shop4" class="store-btn" disabled>Wooden Knife</button>
+            <button type="button" id="shop5" class="store-btn" disabled>Simple Potion</button>
+            <button type="button" id="shop6" class="store-btn" disabled>Wooden Bow</button>
             <hr>
             <h2>Allies</h2>
             <button type="button" id="shop2" class="store-btn" disabled>Hire Mercenary</button>
         </div>
     </div>
 
-    <script src="js/cookie.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
