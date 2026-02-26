@@ -66,6 +66,11 @@ h3 {
     margin: 10px 0;
     padding: 10px;
     cursor: pointer;
+
+    /* Just keeping the buttons same size */
+    min-height: 60px;
+    box-sizing: border-box; 
+
     /* Apply font to buttons */
     font-family: 'MedievalSharp', cursive;
     background-color: #8b4513;
@@ -76,7 +81,7 @@ h3 {
 
 .store-btn:hover {
     background-color: #a0522d;
-    cursor: url('sword.png'), pointer;
+    cursor: url('../images/sword.png'), pointer;
     
 }
 
@@ -111,4 +116,4 @@ h3 {
     color: #333;
 }
 
-.clickme{cursor: url('sword.png'), pointer;}
+.clickme{cursor: url('../images/sword.png'), pointer;}

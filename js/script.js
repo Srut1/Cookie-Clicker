@@ -11,6 +11,7 @@ window.addEventListener('load', function () {
     let upgradePrice5 = 10;
     let upgradePrice6 = 10;
     let autoPrice = 50;
+    let sfxEnabled = true;
 
     // --- 2. THE VIEW (DOM Elements) ---
     const scoreDisplay = document.getElementById("score1");
@@ -24,6 +25,7 @@ window.addEventListener('load', function () {
     const rewardArea = document.getElementById("reward-list");
     const messageBar = document.getElementById("message-bar");
     const counter = document.getElementById("count");
+    const clickDisplay = document.getElementById("click-display");
 
     // --- 3. HELPER FUNCTIONS ---
 
@@ -36,21 +38,63 @@ window.addEventListener('load', function () {
         autoBtn.disabled = (count < autoPrice);
 
         upgradeBtn2.innerHTML = `Upgrade Staff (+1) <br> Cost: ${upgradePrice2}`;
-        upgradeBtn2.disabled = (upgradeBtn2.disabled = (autoStrength < 1) || (count < upgradePrice2));
+        upgradeBtn2.disabled = (autoStrength < 1) || (count < upgradePrice2);
 
         upgradeBtn3.innerHTML = `Upgrade Dagger (+1) <br> Cost: ${upgradePrice3}`;
-        upgradeBtn3.disabled = (upgradeBtn3.disabled = (autoStrength < 2) || (count < upgradePrice3));
+        upgradeBtn3.disabled = (autoStrength < 2) || (count < upgradePrice3);
 
         upgradeBtn4.innerHTML = `Upgrade Potions (+1) <br> Cost: ${upgradePrice4}`;
-        upgradeBtn4.disabled = (upgradeBtn4.disabled = (autoStrength < 3) || (count < upgradePrice4));
+        upgradeBtn4.disabled = (autoStrength < 3) || (count < upgradePrice4);
 
         upgradeBtn5.innerHTML = `Upgrade Bow (+1) <br> Cost: ${upgradePrice5}`;
-        upgradeBtn5.disabled = (upgradeBtn5.disabled = (autoStrength < 4) || (count < upgradePrice5));
+        upgradeBtn5.disabled = (autoStrength < 4) || (count < upgradePrice5);
 
-        upgradeBtn6.innerHTML = `Upgrade Lyre (+1) <br> Cost: ${upgradePrice5}`;
-        upgradeBtn6.disabled = (upgradeBtn6.disabled = (autoStrength < 5) || (count < upgradePrice6));
+        upgradeBtn6.innerHTML = `Upgrade Lyre (+1) <br> Cost: ${upgradePrice6}`;
+        upgradeBtn6.disabled = (autoStrength < 5) || (count < upgradePrice6);
 
         counter.innerHTML = `Gold earned per second: ${autoStrength}`;
+        clickDisplay.innerHTML = `Gold earned per click: ${clickVal}`;
+    }
+    function saveGame() {
+        const gameState = {
+            count: count,
+            clickVal: clickVal,
+            autoStrength: autoStrength,
+            upgradePrice: upgradePrice,
+            upgradePrice2: upgradePrice2,
+            upgradePrice3: upgradePrice3,
+            upgradePrice4: upgradePrice4,
+            upgradePrice5: upgradePrice5,
+            upgradePrice6: upgradePrice6,
+            autoPrice: autoPrice
+        };
+        localStorage.setItem("questClickerSave", JSON.stringify(gameState));
+    }
+
+    function loadGame() {
+        const savedData = localStorage.getItem("questClickerSave");
+        if (savedData) {
+            const gameState = JSON.parse(savedData);
+            
+            count = gameState.count || 0;
+            clickVal = gameState.clickVal || 1;
+            autoStrength = gameState.autoStrength || 0;
+            upgradePrice = gameState.upgradePrice || 10;
+            upgradePrice2 = gameState.upgradePrice2 || 10;
+            upgradePrice3 = gameState.upgradePrice3 || 10;
+            upgradePrice4 = gameState.upgradePrice4 || 10;
+            upgradePrice5 = gameState.upgradePrice5 || 10;
+            upgradePrice6 = gameState.upgradePrice6 || 10;
+            autoPrice = gameState.autoPrice || 50;
+
+            // Unlock hero images based on loaded autoStrength
+            const allies = document.querySelectorAll("#heroes img");
+            allies.forEach((img, index) => {
+                if (index <= autoStrength) img.hidden = false;
+            });
+
+            updateUI();
+        }
     }
 
 
@@ -108,7 +152,7 @@ window.addEventListener('load', function () {
         if (count >= autoPrice) {
             count -= autoPrice;
             autoStrength += 1;
-            autoPrice = Math.round(autoPrice * 2);
+            autoPrice = Math.round(autoPrice * 1.4);
 
             // Unlocks hero images from the Gallery
             const allies = document.querySelectorAll("#heroes img");
@@ -139,7 +183,7 @@ window.addEventListener('load', function () {
 
     upgradeBtn2.addEventListener("mouseover", function () {
         if (autoStrength < 1) {
-            upgradeBtn2.innerHTML = "Only avaliable after hirirng the wizard";
+            upgradeBtn2.innerHTML = "Only avaliable after hiring the wizard";
         }
     });
     upgradeBtn2.addEventListener("mouseout", function () {
@@ -159,7 +203,7 @@ window.addEventListener('load', function () {
 
     upgradeBtn3.addEventListener("mouseover", function () {
         if (autoStrength < 2) {
-            upgradeBtn3.innerHTML = "Only avaliable after hirirng the rouge";
+            upgradeBtn3.innerHTML = "Only avaliable after hiring the rouge";
         }
     });
     upgradeBtn3.addEventListener("mouseout", function () {
@@ -180,7 +224,7 @@ window.addEventListener('load', function () {
 
     upgradeBtn4.addEventListener("mouseover", function () {
         if (autoStrength < 3) {
-            upgradeBtn4.innerHTML = "Only avaliable after hirirng the alchemist";
+            upgradeBtn4.innerHTML = "Only avaliable after hiring the alchemist";
         }
     });
     upgradeBtn4.addEventListener("mouseout", function () {
@@ -201,7 +245,7 @@ window.addEventListener('load', function () {
 
     upgradeBtn5.addEventListener("mouseover", function () {
         if (autoStrength < 4) {
-            upgradeBtn5.innerHTML = "Only avaliable after hirirng the archer";
+            upgradeBtn5.innerHTML = "Only avaliable after hiring the archer";
         }
     });
     upgradeBtn5.addEventListener("mouseout", function () {
@@ -214,7 +258,7 @@ window.addEventListener('load', function () {
         if (count >= upgradePrice6) {
             count -= upgradePrice6;
             clickVal += 1;
-            upgradePrice5 = Math.round(upgradePrice5 * 1.8);
+            upgradePrice6 = Math.round(upgradePrice6 * 1.8);
             updateUI();
         }
     });
@@ -237,16 +281,59 @@ window.addEventListener('load', function () {
 
     // --- 5. MUSIC ---
     // background music (optional for player)
-    const bgm = new Audio("music/bgm.mp3");
-    bgm.load();
-    bgm.play();
+    const bgm = document.getElementById("bgm-player");
+
+    // Start music automatically on the very first click anywhere
+    document.addEventListener('click', function() {
+        bgm.play();
+    }, { once: true });
+
+    // Link the HTML buttons to the music
+    window.playMusic = function() {
+        bgm.play();
+    }
+    window.pauseMusic = function() {
+        bgm.pause();
+    }
 
     // a sound effect whenever you click the treasure chest
     const ping = new Audio("music/coin.wav");
+    const muteSfxBtn = document.getElementById("mute-sfx-btn");
     document.getElementById("countbutton").addEventListener("click", function(){
-        ping.currentTime = 0;
-        ping.play();
+        if (sfxEnabled) { // Only play if sfxEnabled is true
+            ping.currentTime = 0;
+            ping.play();
+        }
     });
+
+    // Toggle button logic
+    muteSfxBtn.addEventListener("click", function() {
+        sfxEnabled = !sfxEnabled; // Flips true to false, or false to true
+        
+        // Optional: Change the button text so the player knows what happened
+        if (sfxEnabled) {
+            muteSfxBtn.textContent = "Mute Chest Sound";
+        } else {
+            muteSfxBtn.textContent = "Unmute Chest Sound";
+        }
+    });
+
+    // Reset Game
+    window.showResetWarning = function() {
+        document.getElementById("reset-modal").style.display = "block";
+    };
+    window.closeResetWarning = function() { // Hide Modal
+        document.getElementById("reset-modal").style.display = "none";
+    };
+    window.confirmReset = function() {
+        // Stop the auto saver
+        let id = window.setInterval(function() {}, 0);
+        while (id--) {
+            window.clearInterval(id);
+        }
+        localStorage.removeItem("questClickerSave");
+        location.reload(); 
+    };
 
     // --- 6. THE MASTER TIMER ---
     setInterval(function () {
@@ -255,7 +342,9 @@ window.addEventListener('load', function () {
             checkMilestones();
             updateUI();
         }
+        saveGame();
     }, 1000);
 
+    loadGame();
     updateUI();
 });

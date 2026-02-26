@@ -16,12 +16,14 @@
             <p style="background-color: white;">Click the terrain to earn gold. Use gold in the Store to buy weapon
                 upgrades and hire allies. More upgrades become accessible with more allies.</p>
         </div>
-        <audio id="bgm">
+        <audio id="bgm-player" loop>
             <source src="music/bgm.mp3" type="audio/mpeg">
         </audio>
         <p style="color:white">Click the button for some adventuring music!</p>
-        <button onclick="bgm.play()" type="button">Play</button>
-        <button onclick="bgm.load()" type="button">Pause</button>
+        <button onclick="playMusic()">Play</button>
+        <button onclick="pauseMusic()">Pause</button>
+        <button id="mute-sfx-btn">Mute Chest Sound</button>
+        <button onclick="showResetWarning()" type="button" style="color: red;">Reset Game</button>
     </div>
     <hr>
 
@@ -33,6 +35,7 @@
                 <h1>Gold</h1>
                 <h1 id="score1">0</h1>
                 <p id="count">Gold earned per second</p>
+                <p id="click-display">Gold earned per click: 1</p>
             </div>
 
             <div class="pic">
@@ -71,6 +74,15 @@
             <hr>
             <h2>Allies</h2>
             <button type="button" id="shop2" class="store-btn" disabled>Hire Mercenary</button>
+        </div>
+    </div>
+
+    <div id="reset-modal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #f4e4bc; padding: 30px; border: 4px solid #4a3728; border-radius: 15px; text-align: center; font-family: 'MedievalSharp', cursive;">
+            <h2 style="color: #4a3728;">Abandon Quest?</h2>
+            <p>Are you sure you want to delete all gold and progress? This cannot be undone!</p>
+            <button onclick="confirmReset()" style="background-color: #8b4513; color: white; padding: 10px 20px; border: none; cursor: pointer; margin-right: 10px;">Yes, Reset</button>
+            <button onclick="closeResetWarning()" style="background-color: #6d6d6d; color: white; padding: 10px 20px; border: none; cursor: pointer;">Cancel</button>
         </div>
     </div>
 
