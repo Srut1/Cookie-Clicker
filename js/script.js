@@ -121,7 +121,7 @@ window.addEventListener('load', function () {
             showAchievement("The Power of Friendship!");
         }
         // Milestone 4: 9 Allies
-        if (autoStrength >= 9 && !document.getElementById('reward-11')) {
+        if (autoStrength >= 12 && !document.getElementById('reward-11')) {
             addReward("⚔️ Full Party", "reward-11");
             showAchievement("The squad is complete!");
         }
