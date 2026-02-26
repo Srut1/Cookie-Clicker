@@ -235,10 +235,18 @@ window.addEventListener('load', function () {
         helpText.style.display = (helpText.style.display === "none") ? "block" : "none";
     });
 
-    // --- 5. BACKGROUND MUSIC (optional for player) ---
+    // --- 5. MUSIC ---
+    // background music (optional for player)
     const bgm = new Audio("music/bgm.mp3");
     bgm.load();
     bgm.play();
+
+    // a sound effect whenever you click the treasure chest
+    const ping = new Audio("music/coin.wav");
+    document.getElementById("countbutton").addEventListener("click", function(){
+        ping.currentTime = 0;
+        ping.play();
+    });
 
     // --- 6. THE MASTER TIMER ---
     setInterval(function () {
