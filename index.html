@@ -4,19 +4,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/knight.webp">
 </head>
+
 <body>
     <div id="header" style="text-align: center; font-family: 'MedievalSharp', cursive;">
         <h1 id="title">Quest Clicker!</h1>
-        <p style="color:white">Forge your destiny and defeat the dark forces!</p>
-
         <button id="help-btn">Help / Instructions</button>
         <div id="help-text" style="display:none;">
-            <p style="background-color: white;" >Click the terrain to earn gold. Use gold in the Store to buy weapon upgrades and hire allies. More upgrades become accessible with more allies.</p>
+            <p style="background-color: white;">Click the terrain to earn gold. Use gold in the Store to buy weapon
+                upgrades and hire allies. More upgrades become accessible with more allies.</p>
         </div>
+        <audio id="bgm">
+            <source src="music/bgm.mp3" type="audio/mpeg">
+        </audio>
+        <p style="color:white">Click the button for some adventuring music!</p>
+        <button onclick="bgm.play()" type="button">Play</button>
+        <button onclick="bgm.load()" type="button">Pause</button>
     </div>
     <hr>
-    
+
     <div id="message-bar" class="popup-message"></div>
 
     <div class="main-container">
@@ -24,11 +31,11 @@
             <div class="hit">
                 <h1>Gold</h1>
                 <h1 id="score1">0</h1>
+                <p id="count">Gold earned per second</p>
             </div>
 
             <div class="pic">
-                <input type="image" src="images/grass.jpg" id="countbutton" class="clickme" alt="Attack!">
-                <img src="images/slime.png" class="slime" width="100">
+                <input type="image" src="images/chest.png" id="countbutton" class="clickme" alt="Attack!">
             </div>
         </div>
 
@@ -67,4 +74,5 @@
 
     <script src="js/script.js"></script>
 </body>
+
 </html>
