@@ -12,9 +12,10 @@
 }
 
 body{
-    background-image: url("background.png");
-    background-size: contain;
-    cursor: url('sword.png'), pointer;
+    background-image: url('../images/background.png'); 
+    background-size: cover;
+    background-attachment: fixed;
+    cursor: url('../images/sword.png'), pointer;
 }
 #title {
   animation: pulse 5s infinite;
