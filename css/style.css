@@ -1,3 +1,15 @@
+/* Sruti Nukala
+    nukalas
+    
+    Layton Lin
+    linl69
+    
+    Ali Raza
+    razaa44
+    
+    Date created: Feburary 4, 2026 
+    stylesheet for incremental game */
+
 /* Import a Medieval font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
 
@@ -26,7 +38,7 @@ body{
     color: white;
   }
   100% {
-    color: #f4e4bc;
+    color: gold;
   }
 }
 
@@ -58,6 +70,17 @@ h3 {
 
 #countbutton:active {
     transform: scale(0.9);
+}
+.top-btn{
+    margin: 10px 0;
+    padding: 10px;
+    cursor: pointer;
+    box-sizing: border-box; 
+
+    /* Apply font to buttons */
+    font-family: 'MedievalSharp', cursive;
+    border: 2px solid #3e2723;
+    border-radius: 5px;
 }
 
 .store-btn {
