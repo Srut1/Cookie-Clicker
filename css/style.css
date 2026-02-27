@@ -59,8 +59,12 @@ h3 {
     border: 3px solid #333;
     background-color: #f4e4bc;
     padding: 20px;
-    text-align: center;
+    text-align: left;
     border-radius: 15px;
+}
+
+.help li{
+    list-style-type: none;
 }
 
 .column {
