@@ -1,3 +1,15 @@
+/* Sruti Nukala
+    nukalas
+    
+    Layton Lin
+    linl69
+    
+    Ali Raza
+    razaa44
+    
+    Date created: Feburary 4, 2026 
+    javascript for the incremental game */
+
 window.addEventListener('load', function () {
 
     // --- 1. THE MODEL (State Variables) ---
@@ -32,10 +44,15 @@ window.addEventListener('load', function () {
     function updateUI() {
         scoreDisplay.textContent = Math.floor(count);
         upgradeBtn.innerHTML = `Upgrade Sword (+1) <br> Cost: ${upgradePrice}`;
-        upgradeBtn.disabled = (count < upgradePrice);
+        upgradeBtn.disabled = (autoStrength >= 11) || (count < upgradePrice);
 
-        autoBtn.innerHTML = `Hire Mercenary (+1/s) <cite: 8> <br> Cost: ${autoPrice}`;
-        autoBtn.disabled = (count < autoPrice);
+        if (autoStrength >= 11) {
+            autoBtn.disabled = true;
+            autoBtn.innerHTML = "No more allies left to hire. You've emptied out our shop.";
+        } else {
+            autoBtn.disabled = (count < autoPrice);
+            autoBtn.innerHTML = `Hire Mercenary (+1/s) <br> Cost: ${autoPrice}`;
+        }
 
         upgradeBtn2.innerHTML = `Upgrade Staff (+1) <br> Cost: ${upgradePrice2}`;
         upgradeBtn2.disabled = (autoStrength < 1) || (count < upgradePrice2);
@@ -75,7 +92,7 @@ window.addEventListener('load', function () {
         const savedData = localStorage.getItem("questClickerSave");
         if (savedData) {
             const gameState = JSON.parse(savedData);
-            
+
             count = gameState.count || 0;
             clickVal = gameState.clickVal || 1;
             autoStrength = gameState.autoStrength || 0;
@@ -120,15 +137,27 @@ window.addEventListener('load', function () {
             addReward("🤝 Small Party", "reward-4");
             showAchievement("The Power of Friendship!");
         }
-        // Milestone 4: 9 Allies
-        if (autoStrength >= 12 && !document.getElementById('reward-11')) {
+        // Milestone 4: 8 Allies
+        if (autoStrength >= 7 && !document.getElementById('reward-7')) {
+            addReward("⚜️ Moderate Party", "reward-7");
+            showAchievement("Eight's a Crowd!");
+        }
+        // Milestone 5: 12 Allies
+        if (autoStrength >= 11 && !document.getElementById('reward-11')) {
             addReward("⚔️ Full Party", "reward-11");
             showAchievement("The squad is complete!");
         }
-        // Milestone 5: Weapon Power (Added for Rubric)
+
+        // Milestone 6: Weapon Power 
         if (clickVal >= 5 && !document.getElementById('reward-weapon')) {
             addReward("🔥 Master Smith", "reward-weapon");
             showAchievement("Your sword is legendary!");
+        }
+
+        // Milestone 7: 1000 Gold
+        if (count >= 1000 && !document.getElementById('reward-1000')) {
+            addReward("🪙 1000 Gold!", "reward-1000");
+            showAchievement("Extraorinary! 1000 reached!");
         }
     }
 
@@ -142,17 +171,18 @@ window.addEventListener('load', function () {
 
     // --- 4. EVENT LISTENERS ---
 
+    // gold count
     document.getElementById("countbutton").addEventListener("click", function () {
         count += clickVal;
         checkMilestones();
         updateUI();
-    }); // the gold count
+    });
 
     autoBtn.addEventListener("click", function () {
         if (count >= autoPrice) {
             count -= autoPrice;
             autoStrength += 1;
-            autoPrice = Math.round(autoPrice * 1.4);
+            autoPrice = Math.round(autoPrice * 1.5);
 
             // Unlocks hero images from the Gallery
             const allies = document.querySelectorAll("#heroes img");
@@ -181,6 +211,7 @@ window.addEventListener('load', function () {
         }
     });
 
+    // shows that button is not accessible yet
     upgradeBtn2.addEventListener("mouseover", function () {
         if (autoStrength < 1) {
             upgradeBtn2.innerHTML = "Only avaliable after hiring the wizard";
@@ -284,22 +315,22 @@ window.addEventListener('load', function () {
     const bgm = document.getElementById("bgm-player");
 
     // Start music automatically on the very first click anywhere
-    document.addEventListener('click', function() {
+    document.addEventListener('click', function () {
         bgm.play();
     }, { once: true });
 
     // Link the HTML buttons to the music
-    window.playMusic = function() {
+    window.playMusic = function () {
         bgm.play();
     }
-    window.pauseMusic = function() {
+    window.pauseMusic = function () {
         bgm.pause();
     }
 
     // a sound effect whenever you click the treasure chest
     const ping = new Audio("music/coin.wav");
     const muteSfxBtn = document.getElementById("mute-sfx-btn");
-    document.getElementById("countbutton").addEventListener("click", function(){
+    document.getElementById("countbutton").addEventListener("click", function () {
         if (sfxEnabled) { // Only play if sfxEnabled is true
             ping.currentTime = 0;
             ping.play();
@@ -307,9 +338,9 @@ window.addEventListener('load', function () {
     });
 
     // Toggle button logic
-    muteSfxBtn.addEventListener("click", function() {
+    muteSfxBtn.addEventListener("click", function () {
         sfxEnabled = !sfxEnabled; // Flips true to false, or false to true
-        
+
         // Optional: Change the button text so the player knows what happened
         if (sfxEnabled) {
             muteSfxBtn.textContent = "Mute Chest Sound";
@@ -319,20 +350,20 @@ window.addEventListener('load', function () {
     });
 
     // Reset Game
-    window.showResetWarning = function() {
+    window.showResetWarning = function () {
         document.getElementById("reset-modal").style.display = "block";
     };
-    window.closeResetWarning = function() { // Hide Modal
+    window.closeResetWarning = function () { // Hide Modal
         document.getElementById("reset-modal").style.display = "none";
     };
-    window.confirmReset = function() {
+    window.confirmReset = function () {
         // Stop the auto saver
-        let id = window.setInterval(function() {}, 0);
+        let id = window.setInterval(function () { }, 0);
         while (id--) {
             window.clearInterval(id);
         }
         localStorage.removeItem("questClickerSave");
-        location.reload(); 
+        location.reload();
     };
 
     // --- 6. THE MASTER TIMER ---
