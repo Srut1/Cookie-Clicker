@@ -44,7 +44,7 @@ window.addEventListener('load', function () {
     function updateUI() {
         scoreDisplay.textContent = Math.floor(count);
         upgradeBtn.innerHTML = `Upgrade Sword (+1) <br> Cost: ${upgradePrice}`;
-        upgradeBtn.disabled = (autoStrength >= 11) || (count < upgradePrice);
+        upgradeBtn.disabled = (count < upgradePrice);
 
         if (autoStrength >= 11) {
             autoBtn.disabled = true;
