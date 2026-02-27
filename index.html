@@ -1,3 +1,15 @@
+<!-- Sruti Nukala
+    nukalas
+    
+    Layton Lin
+    linl69
+    
+    Ali Raza
+    
+    
+    Date created: Feburary 4, 2026
+    html for the incremental game-->
+
 <head>
     <title>Quest Clicker</title>
     <meta charset="UTF-8">
@@ -11,19 +23,20 @@
 <body>
     <div id="header" style="text-align: center; font-family: 'MedievalSharp', cursive;">
         <h1 id="title">Quest Clicker!</h1>
-        <button id="help-btn">Help / Instructions</button>
+        <button id="help-btn" class="top-btn">Help / Instructions</button>
         <div id="help-text" style="display:none;">
-            <p style="background-color: white;">Click the terrain to earn gold. Use gold in the Store to buy weapon
-                upgrades and hire allies. More upgrades become accessible with more allies.</p>
+            <p style="background-color: white;">Click the chest to earn gold. Use gold in the Store to buy weapon
+                upgrades and hire allies. Weapon upgrades increase gold per click, and allies give additonal clicks per second. 
+                More upgrades become accessible with more allies.</p>
         </div>
         <audio id="bgm-player" loop>
             <source src="music/bgm.mp3" type="audio/mpeg">
         </audio>
         <p style="color:white">Click the button for some adventuring music!</p>
-        <button onclick="playMusic()">Play</button>
-        <button onclick="pauseMusic()">Pause</button>
-        <button id="mute-sfx-btn">Mute Chest Sound</button>
-        <button onclick="showResetWarning()" type="button" style="color: red;">Reset Game</button>
+        <button onclick="playMusic()" class="top-btn">Play</button>
+        <button onclick="pauseMusic()" class="top-btn">Pause</button>
+        <button id="mute-sfx-btn" class="top-btn">Mute Chest Sound</button>
+        <button onclick="showResetWarning()" type="button" style="color: red;" class="top-btn">Reset Game</button>
     </div>
     <hr>
 
@@ -92,4 +105,5 @@
 </body>
 
 </html>
+
 
