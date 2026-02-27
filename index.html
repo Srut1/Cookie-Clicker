@@ -25,9 +25,35 @@
         <h1 id="title">Quest Clicker!</h1>
         <button id="help-btn" class="top-btn">Help / Instructions</button>
         <div id="help-text" style="display:none;">
-            <p class="help">Click the chest to earn gold. Use gold in the Store to buy weapon
-                upgrades and hire allies. Weapon upgrades increase gold per click, and allies give additonal clicks per second. 
-                More upgrades become accessible with more allies.</p>
+            <div class="help">
+                <p><strong>How to Play</strong></p>
+                <p>Click the chest to earn gold. Spend your gold in the shop to hire mercenaries and upgrade your
+                    weapons.
+                    The stronger your party and weapons, the faster you earn gold! Weapon upgrades increase gold per
+                    click,
+                    and allies give additonal clicks per second. More upgrades become accessible with more allies.</p>
+
+                <ul><strong>Shop</strong></ul>
+                <li>Hire Mercenary — Automatically earns gold every second and unlocks a new hero to join your party.
+                    You can hire up to 11 mercenaries total.</li>
+                <li>Upgrade Sword — Increases the gold you earn per click by 1.</li>
+                <li>Upgrade Staff — Increases gold per click by 1. Only available after hiring your first mercenary.
+                </li>
+                <li>Upgrade Dagger — Increases gold per click by 1.</li>
+                <li>Upgrade Potions — Increases gold per click by 1.</li>
+                <li>Upgrade Bow — Increases gold per click by 1.</li>
+                <li>Upgrade Lyre — Increases gold per click by 1.</li>
+
+                <ul><strong>Achivements</strong></ul>
+                <li>🏆 100 Gold — Earn a total of 100 gold.</li>
+                <li>🌟 500 Gold — Earn a total of 500 gold.</li>
+                <li>🪙 1000 Gold - Earn a total of 1000 gold</li>
+                <li>🤝 Small Party — Hire 3 mercenaries.</li>
+                <li>⚜️ Moderate Party - Hire 7 mercenaries</li>
+                <li>⚔️ Full Party — Hire 11 mercenaries.</li>
+                <li>🔥 Master Smith — Reach a click power of 5.</li>
+
+            </div>
         </div>
         <audio id="bgm-player" loop>
             <source src="music/bgm.mp3" type="audio/mpeg">
@@ -93,19 +119,21 @@
         </div>
     </div>
 
-    <div id="reset-modal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000;">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #f4e4bc; padding: 30px; border: 4px solid #4a3728; border-radius: 15px; text-align: center; font-family: 'MedievalSharp', cursive;">
+    <div id="reset-modal"
+        style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000;">
+        <div
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #f4e4bc; padding: 30px; border: 4px solid #4a3728; border-radius: 15px; text-align: center; font-family: 'MedievalSharp', cursive;">
             <h2 style="color: #4a3728;">Abandon Quest?</h2>
             <p>Are you sure you want to delete all gold and progress? This cannot be undone!</p>
-            <button onclick="confirmReset()" style="background-color: #8b4513; color: white; padding: 10px 20px; border: none; cursor: pointer; margin-right: 10px;">Yes, Reset</button>
-            <button onclick="closeResetWarning()" style="background-color: #6d6d6d; color: white; padding: 10px 20px; border: none; cursor: pointer;">Cancel</button>
+            <button onclick="confirmReset()"
+                style="background-color: #8b4513; color: white; padding: 10px 20px; border: none; cursor: pointer; margin-right: 10px;">Yes,
+                Reset</button>
+            <button onclick="closeResetWarning()"
+                style="background-color: #6d6d6d; color: white; padding: 10px 20px; border: none; cursor: pointer;">Cancel</button>
         </div>
     </div>
 
 </body>
 
 </html>
-
-
-
 
