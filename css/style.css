@@ -23,23 +23,25 @@
     font-family: 'MedievalSharp', cursive, serif;
 }
 
-body{
-    background-image: url('../images/background.png'); 
+body {
+    background-image: url('../images/background.png');
     background-size: cover;
     background-attachment: fixed;
     cursor: url('../images/sword.png'), pointer;
 }
+
 #title {
-  animation: pulse 5s infinite;
+    animation: pulse 5s infinite;
 }
 
 @keyframes pulse {
-  0% {
-    color: white;
-  }
-  100% {
-    color: gold;
-  }
+    0% {
+        color: white;
+    }
+
+    100% {
+        color: gold;
+    }
 }
 
 /* Apply it to headers as well for a consistent look */
@@ -49,6 +51,16 @@ h3 {
     font-family: 'MedievalSharp', cursive, serif;
     color: #4a3728;
     /* Darker brown for a parchment/medieval feel */
+}
+
+.help {
+    font-family: 'MedievalSharp', cursive, serif;
+    color: #4a3728;
+    border: 3px solid #333;
+    background-color: #f4e4bc;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
 }
 
 .column {
@@ -71,16 +83,37 @@ h3 {
 #countbutton:active {
     transform: scale(0.9);
 }
-.top-btn{
+
+.top-btn {
     margin: 10px 0;
     padding: 10px;
     cursor: pointer;
-    box-sizing: border-box; 
-
-    /* Apply font to buttons */
+    box-sizing: border-box;
     font-family: 'MedievalSharp', cursive;
     border: 2px solid #3e2723;
     border-radius: 5px;
+}
+
+.top-btn:hover {
+    background-color: lightgray ;
+}
+
+.top-btn2 {
+    margin: 10px 0;
+    color: #b8860b;
+    padding: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-family: 'MedievalSharp', cursive;
+    border: 2px solid #b8860b;
+    border-radius: 5px;
+    transition: transform 0.1s;
+}
+
+.top-btn2:hover {
+    background-color: #b8860b;
+    color: white;
+    border: white;
 }
 
 .store-btn {
@@ -92,7 +125,7 @@ h3 {
 
     /* Just keeping the buttons same size */
     min-height: 60px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 
     /* Apply font to buttons */
     font-family: 'MedievalSharp', cursive;
@@ -105,7 +138,7 @@ h3 {
 .store-btn:hover {
     background-color: #a0522d;
     cursor: url('../images/sword.png'), pointer;
-    
+
 }
 
 .store-btn:disabled {
@@ -139,4 +172,6 @@ h3 {
     color: #333;
 }
 
-.clickme{cursor: url('../images/sword.png'), pointer;}
+.clickme {
+    cursor: url('../images/sword.png'), pointer;
+}
